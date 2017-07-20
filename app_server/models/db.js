@@ -1,6 +1,9 @@
 var mongoose = require('mongoose');
 var gracefulShutdown;
 var dbURI = 'mongodb://localhost/Loc8r';
+if(process.env.NODE_ENV === 'production') {
+	dbURI = 'mongodb://loc8r-dev:er#402ER@ds045714.mlab.com:45714/meandb'
+}
 mongoose.connect(dbURI);
 
 
@@ -55,3 +58,6 @@ process.on('SIGTERM', function(){
 		process.exit(0);
 	});
 });
+
+
+require('./locations');
